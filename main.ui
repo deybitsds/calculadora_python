@@ -7,13 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>450</width>
-    <height>740</height>
+    <height>660</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>450</width>
-    <height>740</height>
+    <height>660</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -109,7 +109,9 @@
        <item>
         <widget class="QLabel" name="titulo">
          <property name="styleSheet">
-          <string notr="true">color: rgb(255, 255, 255);</string>
+          <string notr="true">border:none;
+font: 12pt &quot;Montserrat&quot;;
+color: rgb(255, 255, 255);</string>
          </property>
          <property name="text">
           <string> Calculadora</string>
@@ -293,13 +295,13 @@ background-color:#ff0000;
       <property name="minimumSize">
        <size>
         <width>450</width>
-        <height>90</height>
+        <height>60</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
         <width>16777215</width>
-        <height>90</height>
+        <height>60</height>
        </size>
       </property>
       <property name="styleSheet">
@@ -312,18 +314,23 @@ background-color:#ff0000;
        <enum>QFrame::Raised</enum>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_7">
-       <item>
+       <item alignment="Qt::AlignRight|Qt::AlignVCenter">
         <widget class="QLabel" name="label">
          <property name="font">
           <font>
-           <family>DejaVu Sans</family>
-           <pointsize>19</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
+           <family>Montserrat</family>
+           <pointsize>30</pointsize>
+           <weight>50</weight>
+           <italic>false</italic>
+           <bold>false</bold>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true">color:rgb(255,255,255);
+font:  30pt &quot;Montserrat&quot;;</string>
+         </property>
          <property name="text">
-          <string>input</string>
+          <string>1+2x(4+2)-12</string>
          </property>
         </widget>
        </item>
@@ -335,7 +342,13 @@ background-color:#ff0000;
       <property name="minimumSize">
        <size>
         <width>450</width>
-        <height>110</height>
+        <height>80</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>80</height>
        </size>
       </property>
       <property name="styleSheet">
@@ -348,10 +361,14 @@ background-color:#ff0000;
        <enum>QFrame::Raised</enum>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_8">
-       <item>
+       <item alignment="Qt::AlignRight|Qt::AlignVCenter">
         <widget class="QLabel" name="label_2">
+         <property name="styleSheet">
+          <string notr="true">color:rgb(255,255,255);
+font:  Bold 45pt &quot;Montserrat&quot;;</string>
+         </property>
          <property name="text">
-          <string>output</string>
+          <string>123232323</string>
          </property>
         </widget>
        </item>
@@ -363,7 +380,13 @@ background-color:#ff0000;
       <property name="minimumSize">
        <size>
         <width>450</width>
-        <height>100</height>
+        <height>86</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>1920</width>
+        <height>117</height>
        </size>
       </property>
       <property name="styleSheet">
@@ -475,8 +498,8 @@ background-color:rgb(139, 175, 191);
         <widget class="QPushButton" name="bt_limpiar">
          <property name="minimumSize">
           <size>
-           <width>170</width>
-           <height>80</height>
+           <width>140</width>
+           <height>70</height>
           </size>
          </property>
          <property name="styleSheet">
@@ -484,6 +507,7 @@ background-color:rgb(139, 175, 191);
 border-radius:20px;
 border: 1px solid rgb(255, 255, 255);
 color:rgb(255,255,255);
+font:  20pt &quot;Montserrat&quot;;
 }
 
 QPushButton:hover{
@@ -543,6 +567,12 @@ background-color:rgb(139, 175, 191);
        <size>
         <width>450</width>
         <height>100</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>1920</width>
+        <height>133</height>
        </size>
       </property>
       <property name="styleSheet">
@@ -617,6 +647,7 @@ QPushButton:hover {
 	background-color: rgb(139, 175, 191);
     border-radius: 15px;
     color: rgb(255, 255, 255);
+	font: 30pt &quot;Montserrat&quot;;
 }
 
 QPushButton:hover {
@@ -641,6 +672,7 @@ QPushButton:hover {
 	background-color: rgb(139, 175, 191);
     border-radius: 15px;
     color: rgb(255, 255, 255);
+	font: 30pt &quot;Montserrat&quot;;
 }
 
 QPushButton:hover {
@@ -665,6 +697,7 @@ QPushButton:hover {
 	background-color: rgb(139, 175, 191);
     border-radius: 15px;
     color: rgb(255, 255, 255);
+	font:  30pt &quot;Montserrat&quot;;
 }
 
 QPushButton:hover {
@@ -689,11 +722,13 @@ QPushButton:hover {
     background-color: rgb(26, 30, 39);
     border-radius: 15px;
     color: rgb(54, 105, 110);
+	font: 30pt &quot;Montserrat&quot;;
 }
 
 QPushButton:hover {
 	background-color: rgb(139, 175, 191);
-}</string>
+}
+</string>
          </property>
          <property name="text">
           <string>+</string>
@@ -708,7 +743,13 @@ QPushButton:hover {
       <property name="minimumSize">
        <size>
         <width>450</width>
-        <height>100</height>
+        <height>96</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>1920</width>
+        <height>129</height>
        </size>
       </property>
       <property name="styleSheet">
@@ -783,6 +824,7 @@ QPushButton:hover {
 	background-color: rgb(139, 175, 191);
     border-radius: 15px;
     color: rgb(255, 255, 255);
+	font: 30pt &quot;Montserrat&quot;;
 }
 
 QPushButton:hover {
@@ -807,6 +849,7 @@ QPushButton:hover {
 	background-color: rgb(139, 175, 191);
     border-radius: 15px;
     color: rgb(255, 255, 255);
+	font: 30pt &quot;Montserrat&quot;;
 }
 
 QPushButton:hover {
@@ -831,6 +874,7 @@ QPushButton:hover {
 	background-color: rgb(139, 175, 191);
     border-radius: 15px;
     color: rgb(255, 255, 255);
+	font: 30pt &quot;Montserrat&quot;;
 }
 
 QPushButton:hover {
@@ -855,11 +899,13 @@ QPushButton:hover {
     background-color: rgb(26, 30, 39);
     border-radius: 15px;
     color: rgb(54, 105, 110);
+	font:30pt &quot;Montserrat&quot;;
 }
 
 QPushButton:hover {
 	background-color: rgb(139, 175, 191);
-}</string>
+}
+</string>
          </property>
          <property name="text">
           <string>-</string>
@@ -874,7 +920,13 @@ QPushButton:hover {
       <property name="minimumSize">
        <size>
         <width>450</width>
-        <height>100</height>
+        <height>96</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>129</height>
        </size>
       </property>
       <property name="styleSheet">
@@ -949,6 +1001,7 @@ QPushButton:hover {
 	background-color: rgb(139, 175, 191);
     border-radius: 15px;
     color: rgb(255, 255, 255);
+	font: 30pt &quot;Montserrat&quot;;
 }
 
 QPushButton:hover {
@@ -973,6 +1026,7 @@ QPushButton:hover {
 	background-color: rgb(139, 175, 191);
     border-radius: 15px;
     color: rgb(255, 255, 255);
+	font: 30pt &quot;Montserrat&quot;;
 }
 
 QPushButton:hover {
@@ -997,6 +1051,7 @@ QPushButton:hover {
 	background-color: rgb(139, 175, 191);
     border-radius: 15px;
     color: rgb(255, 255, 255);
+	font: 30pt &quot;Montserrat&quot;;
 }
 
 QPushButton:hover {
@@ -1027,11 +1082,13 @@ QPushButton:hover {
     background-color: rgb(26, 30, 39);
     border-radius: 15px;
     color: rgb(54, 105, 110);
+	font:30pt &quot;Montserrat&quot;;
 }
 
 QPushButton:hover {
 	background-color: rgb(139, 175, 191);
-}</string>
+}
+</string>
          </property>
          <property name="text">
           <string>x</string>
@@ -1046,7 +1103,13 @@ QPushButton:hover {
       <property name="minimumSize">
        <size>
         <width>450</width>
-        <height>100</height>
+        <height>102</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>135</height>
        </size>
       </property>
       <property name="styleSheet">
@@ -1072,7 +1135,7 @@ QPushButton:hover {
         <number>4</number>
        </property>
        <property name="bottomMargin">
-        <number>0</number>
+        <number>4</number>
        </property>
        <item>
         <widget class="QPushButton" name="bt_pow">
@@ -1122,6 +1185,7 @@ QPushButton:hover {
 	background-color: rgb(139, 175, 191);
     border-radius: 15px;
     color: rgb(255, 255, 255);
+	font: 30pt &quot;Montserrat&quot;;
 }
 
 QPushButton:hover {
@@ -1146,6 +1210,7 @@ QPushButton:hover {
 	background-color: rgb(139, 175, 191);
     border-radius: 15px;
     color: rgb(255, 255, 255);
+	font: 30pt &quot;Montserrat&quot;;
 }
 
 QPushButton:hover {
@@ -1170,11 +1235,13 @@ QPushButton:hover {
     background-color: rgb(26, 30, 39);
     border-radius: 15px;
     color: rgb(54, 105, 110);
+	font:30pt &quot;Montserrat&quot;;
 }
 
 QPushButton:hover {
 	background-color: rgb(139, 175, 191);
-}</string>
+}
+</string>
          </property>
          <property name="text">
           <string>/</string>
@@ -1201,12 +1268,14 @@ QPushButton:hover {
     border-radius: 15px;
     color: rgb(255, 255, 255);
     border: 1px solid rgb(255, 255, 255);
+	font: Bold 30pt &quot;Montserrat&quot;;
 }
 
 QPushButton:hover {
 	background-color: rgb(255, 255, 255);
     color: rgb(139, 175, 191);
-}</string>
+}
+</string>
          </property>
          <property name="text">
           <string>=</string>
