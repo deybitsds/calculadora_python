@@ -40,12 +40,10 @@ class View(QtWidgets.QMainWindow):
         cadena = self.controller.recuperar_input()
         self.ui.txt_input.setText(cadena)
 
-    def actualizar_output(self, cadena):
-        cadena = self.controller.recuperar_output()
-        self.ui.txt_output.setText(cadena)
+    def mostrar_resultado(self, resultado):
+        self.ui.txt_output.setText(resultado)
 
     def limpiar(self):
-        self.ui.txt_input.clear()
         self.ui.txt_output.clear()
 
     def control_bt_minimizar(self):
