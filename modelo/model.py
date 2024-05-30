@@ -25,10 +25,15 @@ class Model:
         return str(len(self.input))
 
     def deshacer(self):
+        print(self.undo_redo.Undo)
+        print(self.undo_redo.Redo)
+        print("input -> ", self.input)
+        
         if not self.undo_redo.undo():
             return
         else:
-            self.input.pop()
+            if self.input:
+                self.input.pop()
 
     def rehacer(self):
         redo = self.undo_redo.redo()
@@ -36,6 +41,9 @@ class Model:
             return
         else:
             self.input.append(redo)
+        
+        print(self.undo_redo.Undo)
+        print(self.undo_redo.Redo)
 
     def borrar(self):
         if not self.input:
@@ -45,5 +53,8 @@ class Model:
             self.undo_redo.undo()
 
     def limpiar(self):
-        while self.input:
-            self.borrar()
+        input = self.recuperar_input()
+        self.input = []
+        self.undo_redo.undo(input)
+        print(self.undo_redo.Undo)
+        print(self.undo_redo.Redo)

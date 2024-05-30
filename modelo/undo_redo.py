@@ -9,7 +9,12 @@ class UndoRedo:
         self.Undo.append(char)
         self.Redo = []
 
-    def undo(self):
+    def undo(self, elemento = ""):
+        if elemento != "":
+            print(elemento)
+            self.Undo.append(elemento)
+            return True
+
         if (self.Undo):
             x = self.Undo.pop()
             self.Redo.append(x)
