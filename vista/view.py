@@ -44,7 +44,7 @@ class View(QtWidgets.QMainWindow):
         self.ui.txt_output.setText(resultado)
 
     def limpiar(self):
-        self.ui.txt_output.clear()
+        self.ui.txt_output.setText("0.0")
 
     def control_bt_minimizar(self):
         self.showMinimized()        
@@ -715,7 +715,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.titulo.setText(_translate("MainWindow", " Calculadora"))
         self.bt_llaves2.setShortcut(_translate("MainWindow", "}"))
-        self.bt_corchetes2.setShortcut(_translate("MainWindow", "]"))
+        self.bt_corchetes2.setShortcut(_translate("MainWindow", "Space"))
         self.bt_parentesis2.setShortcut(_translate("MainWindow", ")"))
         self.bt_rehacer.setShortcut(_translate("MainWindow", "Ctrl+Y"))
         self.bt_deshacer.setShortcut(_translate("MainWindow", "Ctrl+Z"))

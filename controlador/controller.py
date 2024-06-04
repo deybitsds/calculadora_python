@@ -32,12 +32,12 @@ class Controller:
         self.view.ui.bt_div.clicked.connect(lambda:self.ingresar_char("/"))
         self.view.ui.bt_pow.clicked.connect(lambda:self.ingresar_char("^"))
 
-        self.view.ui.bt_parentesis.clicked.connect(lambda:self.ingresar_char("("))
+        self.view.ui.bt_parentesis.clicked.connect(self.ingresar_parentesis)
         self.view.ui.bt_parentesis2.clicked.connect(lambda:self.ingresar_char(")"))
-        self.view.ui.bt_llaves.clicked.connect(lambda:self.ingresar_char("{"))
+        self.view.ui.bt_llaves.clicked.connect(self.ingresar_llaves)
         self.view.ui.bt_llaves2.clicked.connect(lambda:self.ingresar_char("}"))
-        self.view.ui.bt_corchetes.clicked.connect(lambda:self.ingresar_char("["))
-        self.view.ui.bt_corchetes2.clicked.connect(lambda:self.ingresar_char("]"))
+        self.view.ui.bt_corchetes.clicked.connect(self.ingresar_corchetes)
+        # self.view.ui.bt_corchetes2.clicked.connect(lambda:self.ingresar_char(""))
 
         self.view.ui.bt_borrar.clicked.connect(self.borrar)
         self.view.ui.bt_limpiar.clicked.connect(self.limpiar)
@@ -49,12 +49,33 @@ class Controller:
     def ingresar_char(self, char, simbolo = ""):
         if simbolo == "":
             simbolo = char
+
         self.model.ingresar_char(char, simbolo)
         self.view.actualizar_input()
  
+    def ingresar_parentesis(self):
+        input_actual = self.model.recuperar_input()
+        caracter = recuperar_parentesis_correspondientes(input_actual)
+        self.ingresar_char(caracter)
+
+    def ingresar_llaves(self):
+        input_actual = self.model.recuperar_input()
+        caracter = recuperar_llaves_correspondientes(input_actual)
+        self.ingresar_char(caracter)     
+
+    def ingresar_corchetes(self):
+        input_actual = self.model.recuperar_input()
+        caracter = recuperar_corchetes_correspondientes(input_actual)
+        self.ingresar_char(caracter)     
+
     def mostrar_resultado(self):
-        resultado = self.model.calcular_resultado()
-        self.view.mostrar_resultado(resultado)
+        resultado_original = self.model.calcular_resultado()
+        resultado_entero = int(resultado)
+
+        if resultado_original == resultado_entero:
+            self.view.mostrar_resultado(str(int(resultado)))
+        else:
+            self.view.mostrar_resultado(str(round(resultado,7)))
 
     def borrar(self):
         self.model.borrar()

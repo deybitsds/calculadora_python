@@ -1,5 +1,6 @@
 
 from modelo.undo_redo import UndoRedo
+from modelo.modulos import *
 
 class Model:
     def __init__(self):
@@ -7,28 +8,36 @@ class Model:
         self.undo_redo = UndoRedo()
 
     def ingresar_char(self, char, simbolo = ""):
-        if simbolo != "":
-            self.input.append(simbolo)
-        else:
-            self.input.append(char)
-        
-        self.undo_redo.ingresar_char(char)
 
-    def evaluacion_postfija(self):
-        # self.input
-        pass
+        self.input.append(char)
+        self.undo_redo.ingresar_char(char)
 
     def recuperar_input(self):
         return ''.join(self.input)
         
     def calcular_resultado(self):
-        return str(len(self.input))
+        if not self.input:
+            return "0.0"
+        cadena = self.recuperar_input()
+        if not verificar_parentesis(cadena):
+            return "SYNTAX E."
+
+        infijo = self.input
+        postfijo = infijoPostfija(infijo)
+        
+        if not postfijo and self.input:
+            return "SYNTAX E."
+
+        try:
+            if not eval_postfija(postfijo):
+                return "MATH E."
+        except IndexError as e: 
+            return "SYNTAX E."
+
+        return eval_postfija(postfijo)
 
     def deshacer(self):
-        print(self.undo_redo.Undo)
-        print(self.undo_redo.Redo)
-        print("input -> ", self.input)
-        
+
         if not self.undo_redo.undo():
             return
         else:
@@ -53,8 +62,6 @@ class Model:
             self.undo_redo.undo()
 
     def limpiar(self):
-        input = self.recuperar_input()
         self.input = []
-        self.undo_redo.undo(input)
-        print(self.undo_redo.Undo)
-        print(self.undo_redo.Redo)
+        self.undo_redo.Undo = []
+        self.undo_redo.Redo = []
