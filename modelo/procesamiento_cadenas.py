@@ -1,20 +1,22 @@
-def verificar_parentesis(expresion):
+# modulo para verificar si los parentesis estan correctos en cadena
+def verificar_parentesis(cadena):
     # Diccionario de pares de paréntesis
     pares = {')': '(', ']': '[', '}': '{'}
     # Pila para almacenar los paréntesis abiertos
     pila = []
 
-    for c in expresion:
-        if c in pares.values():  # Si es un paréntesis de apertura
-            pila.append(c)
-        elif c in pares.keys():  # Si es un paréntesis de cierre
-            if not pila or pila[-1] != pares[c]:  # Verifica si la pila está vacía o el paréntesis no coincide
+    for char in cadena:
+        if char in pares.values():  # Si es un paréntesis de apertura
+            pila.append(char)
+        elif char in pares.keys():  # Si es un paréntesis de cierre
+            if not pila or pila[-1] != pares[char]:  # Verifica si la pila está vacía o el paréntesis no coincide
                 return False
             else:
                 pila.pop()  # Elimina el paréntesis coincidente de la pila
 
     return not pila  # Verifica si la pila está vacía al final
 
+# funcion para recuperar el caracter parentesis correspondiente
 def recuperar_parentesis_correspondientes(cadena):
     balance = 0
     for char in cadena:
@@ -26,6 +28,7 @@ def recuperar_parentesis_correspondientes(cadena):
             return ")"
     return "(" if balance == 0 else ")"
 
+# funcion para recuperar el caracter llave correspondiente
 def recuperar_llaves_correspondientes(cadena):
     balance = 0
     for char in cadena:
@@ -37,6 +40,7 @@ def recuperar_llaves_correspondientes(cadena):
             return "}"
     return "{" if balance == 0 else "}"
 
+# funcion para recuperar el caracter corchete correspondiente
 def recuperar_corchetes_correspondientes(cadena):
     balance = 0
     for char in cadena:
@@ -155,6 +159,12 @@ def eval_postfija(expresion):
             pila.append(float(s))
 
     return pila[-1]
+
+def contiene_numeros(cadena):
+    for caracter in cadena:
+        if caracter.isdigit():
+            return True
+    return False
 
 def probar_modulo(modulo):
     while 1:

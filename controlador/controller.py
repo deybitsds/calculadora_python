@@ -4,64 +4,98 @@ from modelo.model import *
 
 class Controller:
     def __init__(self):
+        # instancia View
         self.view = View(self)
+        # instancia Model
         self.model = Model()
 
+        # gestionar los botones
         self.gestion_botones()
 
+    # recuperar cadena del modelo
     def recuperar_input(self):
         return self.model.recuperar_input()
 
-    def ingresar_char(self, char, simbolo = ""):
-        if simbolo == "":
-            simbolo = char
-
-        self.model.ingresar_char(char, simbolo)
+    # ingresar caracter en el modelo
+    def ingresar_char(self, char):
+        #
+        self.model.ingresar_char(char)
+        # actualizar la caja de texto input
         self.view.actualizar_input()
  
     def ingresar_parentesis(self):
+        #
         input_actual = self.model.recuperar_input()
+        # recuperar caracter correspondiente
         caracter = recuperar_parentesis_correspondientes(input_actual)
+        #
         self.ingresar_char(caracter)
 
     def ingresar_llaves(self):
+        #
         input_actual = self.model.recuperar_input()
+        # recuperar caracter correspondiente
         caracter = recuperar_llaves_correspondientes(input_actual)
+        #
         self.ingresar_char(caracter)     
 
     def ingresar_corchetes(self):
+        #
         input_actual = self.model.recuperar_input()
+        # recuperar caracter correspondiente
         caracter = recuperar_corchetes_correspondientes(input_actual)
+        #
         self.ingresar_char(caracter)     
 
     def mostrar_resultado(self):
+        # calcular resultado 
         resultado_original = self.model.calcular_resultado()
-        resultado_entero = int(resultado)
+        
+        # gestionar los errores
+        if not contiene_numeros(str(resultado_original)):
+            self.view.mostrar_resultado(resultado_original)
+            return     
+        
+        # comprobar que el numero sea entero
+        resultado_entero = int(resultado_original)
 
+        # caso sea convertible a entero
         if resultado_original == resultado_entero:
-            self.view.mostrar_resultado(str(int(resultado)))
+            # 
+            self.view.mostrar_resultado(str(resultado_entero))
         else:
-            self.view.mostrar_resultado(str(round(resultado,7)))
+            # caso sea flotante redondear a 7 numeros despues de la coma decimal
+            self.view.mostrar_resultado(str(round(resultado_original, 7)))
 
     def borrar(self):
+        #
         self.model.borrar()
+        # actualizar la caja de texto input
         self.view.actualizar_input()
 
     def undo(self):
+        #
         self.model.deshacer()
+        # actualizar la caja de texto input
         self.view.actualizar_input()
 
     def redo(self):
+        # 
         self.model.rehacer()
+        # actualizar la caja de texto input
         self.view.actualizar_input()
 
     def limpiar(self):
+        # borrar la cadena en el modelo
         self.model.limpiar()
+        # actualizar la caja de texto input
         self.view.actualizar_input()
+        # borrar la caja de texto output
         self.view.limpiar()
 
     def gestion_botones(self):
         
+        # conexion de los botones con las funciones correspondientes
         self.view.ui.bt_0.clicked.connect(lambda:self.ingresar_char("0"))
         self.view.ui.bt_1.clicked.connect(lambda:self.ingresar_char("1"))
         self.view.ui.bt_2.clicked.connect(lambda:self.ingresar_char("2"))
@@ -76,7 +110,7 @@ class Controller:
 
         self.view.ui.bt_sum.clicked.connect(lambda:self.ingresar_char("+"))
         self.view.ui.bt_dif.clicked.connect(lambda:self.ingresar_char("-"))
-        self.view.ui.bt_mul.clicked.connect(lambda:self.ingresar_char("*", "x"))
+        self.view.ui.bt_mul.clicked.connect(lambda:self.ingresar_char("*"))
         self.view.ui.bt_div.clicked.connect(lambda:self.ingresar_char("/"))
         self.view.ui.bt_pow.clicked.connect(lambda:self.ingresar_char("^"))
 
