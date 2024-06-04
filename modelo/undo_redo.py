@@ -19,18 +19,16 @@ class UndoRedo:
             x = self.Undo.pop()
             self.Redo.append(x)
             return True
-        else:
-            #print("undo: (pila Undo vacía)")
-            return False
+
+        return False
     
     def redo(self):
         if (self.Redo):
             x = self.Redo.pop()
             self.Undo.append(x)
             return x
-        else:
-            # print("redo: (pila Redo vacía)")
-            return False
+
+        return False
         
     def recuperar_cadena(self):
         cadena_actual = ""

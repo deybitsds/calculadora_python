@@ -1,6 +1,6 @@
 
 from modelo.undo_redo import UndoRedo
-from modelo.modulos import *
+from modelo.procesamiento_cadenas import *
 
 class Model:
     def __init__(self):

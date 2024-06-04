@@ -70,8 +70,6 @@ def infijoPostfija(expresion):
     # Quitar espacios de la expresión
     # expresion = expresion.replace(" ", "")
 
-    # print("expresion -> ", expresion)
-    
     # Convertir la expresión en una lista de tokens
     infijo = []
     numero = ''
@@ -130,8 +128,6 @@ def eval_postfija(expresion):
 
     postfijo = expresion
 
-    # print("postfijo ->", postfijo)
-
     for s in postfijo:
         if s == "+":
             opnd2 = pila.pop()
@@ -160,31 +156,10 @@ def eval_postfija(expresion):
 
     return pila[-1]
 
-
-
-def prueba_verificar_parentesis():
+def probar_modulo(modulo):
     while 1:
-        print(verificar_parentesis(input("cadena: ")))
-
-    print(verificar_parentesis("([]{})"))  # True
-    print(verificar_parentesis("([{}])"))  # True
-    print(verificar_parentesis("([)]"))    # False
-    print(verificar_parentesis("([]"))     # False
-
-def prueba_infijo_a_postfijo():
-
-    while 1:
-        print(infijoPostfija(input("cadena: ")))
-
-    print(infijoPostfija("a+b*(c^d-e)^(f+g*h)-i"))  # "abcd^e-fgh*+^*+i-"
-    print(infijoPostfija("(A+B)*(C+D)"))  # "AB+CD+*"
-    print(infijoPostfija("A*B+C*D"))  # "AB*CD*+"
-    print(infijoPostfija("A+B+C+D"))  # "AB+C+D+"
-
-def prueba_eval_postfija():
-    while 1:
-        print(eval_postfija(input("cadena: ")))
+        print(modulo(input("cadena: ")))
 
 if __name__ == "__main__":
 
-    prueba_infijo_a_postfijo()
+    probar_modulo(infijoPostfija)
