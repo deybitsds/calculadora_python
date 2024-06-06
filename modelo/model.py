@@ -5,25 +5,25 @@ from modelo.procesamiento_cadenas import *
 class Model:
     def __init__(self):
         # inicializar la lista de caracteres interna
-        self.input = []
+        self.input = ""
         # inicializar las pilas undo y redo
         self.undo_redo = UndoRedo()
 
     # gestionar el ingreso de un caracter
     def ingresar_char(self, char):
         # 
-        self.input.append(char)
+        self.input += char
         # añadir char a undo_redo
         self.undo_redo.ingresar_char(char)
 
     # 
     def recuperar_input(self):
-        # concatenar lista interna caracteres 
-        return ''.join(self.input)
+        # concatenar cadena interna caracteres 
+        return self.input
         
     # 
     def calcular_resultado(self):
-        # caso este vacio la lista interna
+        # caso este vacio la cadena interna
         if not self.input:
             return "0.0"
         
@@ -45,16 +45,17 @@ class Model:
         # tratar de evaluar la evaluacion_postfija
         try:
             # caso ocurra un error matematico 
-            if not eval_postfija(postfijo):
+            if eval_postfija(postfijo) != 0 and not eval_postfija(postfijo):
                 return "MATH ERROR"
 
-        except IndexError as e: 
+        except IndexError: 
             # caso ocurra un error de sintaxis
             return "SYNTAX E."
 
         # caso pase todas las "pruebas", devolver el numero
         return eval_postfija(postfijo)
 
+    ''' RESOLVER '''
     def deshacer(self):
         # caso no haya nada en la pila undo
         if not self.undo_redo.undo():
@@ -62,10 +63,11 @@ class Model:
             return
 
         # caso si haya un elem en la pila
-        if self.input:
-            # quitar  el ultimo elemento de la lista interna
-            self.input.pop()
-
+        if self.input != "":
+            # quitar  el ultimo elemento de la cadena interna
+            self.input = self.input[:-1]
+    
+    ''' RESOLVER '''
     def rehacer(self):
         # recuperar la listra de redos
         redo = self.undo_redo.redo()
@@ -79,16 +81,17 @@ class Model:
 
     def borrar(self):
         # verificar que haya algo que borrar
-        if not self.input:
+        if self.input == "":
             # no hacer nada -> ignorar peticion
             return
 
         # caso haya algo
-        self.input.pop() # quitar ultimo elem lista interna
-        self.undo_redo.undo() # llamar a undo
+        self.input = self.input[:-1] # quitar ultimo elem cadena interna
+        self.undo_redo.undo2() # llamar a undo
 
+    ''' RESOLVER '''
     def limpiar(self):
         # limpiar todo
-        self.input = []
+        self.input = ""
         self.undo_redo.Undo = []
         self.undo_redo.Redo = []

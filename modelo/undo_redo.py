@@ -31,6 +31,16 @@ class UndoRedo:
         
         # Si no hay elementos para deshacer, retornar False
         return False
+
+    def undo2(self):
+
+        if not self.Undo:
+            return False
+
+        x = self.Undo.pop()
+        self.Redo.append(x)
+        return True
+
     
     def redo(self):
         # Si la lista de rehacer (Redo) no está vacía
