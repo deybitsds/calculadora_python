@@ -3,30 +3,30 @@ class UndoRedo:
         
     def __init__(self):
         # Inicializar pilas vacias
-        self.Undo = []
-        self.Redo = []
+        self.pila_undo = []
+        self.pila_redo = []
 
     # funcion para gestionar el ingreso de un char
     def ingresar_char(self, char):
         # ingresar a pila undo
-        self.Undo.append(char)
+        self.pila_undo.append(char)
         # limpiar pila redo
-        self.Redo = []
+        self.pila_redo = []
 
     # funcion para gestionar la insutrccion undo
     def undo(self, elemento = ""):
         # Si existe el elemento
         if elemento != "":
-            # Agregar el elemento a la lista de deshacer (Undo)
-            self.Undo.append(elemento)
+            # Agregar el elemento a la lista de deshacer (pila_undo)
+            self.pila_undo.append(elemento)
             return True
         
         # Realizar la operación de deshacer
-        if self.Undo:
-            # Obtener el último elemento de la lista de deshacer (Undo)
-            x = self.Undo.pop()
-            # Agregar el elemento a la lista de rehacer (Redo)
-            self.Redo.append(x)
+        if self.pila_undo:
+            # Obtener el último elemento de la lista de deshacer (pila_undo)
+            x = self.pila_undo.pop()
+            # Agregar el elemento a la lista de rehacer (pila_redo)
+            self.pila_redo.append(x)
             return True
         
         # Si no hay elementos para deshacer, retornar False
@@ -34,23 +34,34 @@ class UndoRedo:
 
     def undo2(self):
 
-        if not self.Undo:
+        if self.pila_undo_esta_vacia():
             return False
 
-        x = self.Undo.pop()
-        self.Redo.append(x)
+        x = self.pila_undo.pop()
+        self.pila_redo.append(x)
         return True
 
     
     def redo(self):
-        # Si la lista de rehacer (Redo) no está vacía
-        if self.Redo:
-            # Obtener y eliminar el último elemento de la lista de rehacer (Redo)
-            x = self.Redo.pop()
-            # Agregar el elemento a la lista de deshacer (Undo)
-            self.Undo.append(x)
+
+        if self.pila_redo_esta_vacia():
+
+            return ""
+
+        # Si la lista de rehacer (pila_redo) no está vacía
+        if self.pila_redo:
+            # Obtener y eliminar el último elemento de la lista de rehacer (pila_redo)
+            x = self.pila_redo.pop()
+            # Agregar el elemento a la lista de deshacer (pila_undo)
+            self.pila_undo.append(x)
             # Retornar el elemento que se rehizo
             return x
         
-        # Si la lista de rehacer (Redo) está vacía, retornar False
+        # Si la lista de rehacer (pila_redo) está vacía, retornar False
         return False
+
+    def pila_undo_esta_vacia(self):
+        return not self.pila_undo
+    
+    def pila_redo_esta_vacia(self):
+        return not self.pila_redo

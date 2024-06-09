@@ -57,6 +57,7 @@ class Controller:
             return     
         
         # comprobar que el numero sea entero
+        resultado_original = float(resultado_original)
         resultado_entero = int(resultado_original)
 
         # caso sea convertible a entero

@@ -132,17 +132,65 @@ color: rgb(255, 255, 255);</string>
         </spacer>
        </item>
        <item>
+        <widget class="QPushButton" name="bt_parentesis">
+         <property name="maximumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="shortcut">
+          <string>(</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="bt_llaves">
+         <property name="maximumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="shortcut">
+          <string>{</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="bt_corchetes">
+         <property name="maximumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="shortcut">
+          <string>[</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QPushButton" name="bt_llaves2">
          <property name="minimumSize">
           <size>
-           <width>1</width>
-           <height>1</height>
+           <width>0</width>
+           <height>0</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>1</width>
-           <height>1</height>
+           <width>0</width>
+           <height>0</height>
           </size>
          </property>
          <property name="styleSheet">
@@ -162,14 +210,14 @@ border:0px;
         <widget class="QPushButton" name="bt_corchetes2">
          <property name="minimumSize">
           <size>
-           <width>1</width>
-           <height>1</height>
+           <width>0</width>
+           <height>0</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>1</width>
-           <height>1</height>
+           <width>0</width>
+           <height>0</height>
           </size>
          </property>
          <property name="styleSheet">
@@ -189,14 +237,14 @@ border:0px;
         <widget class="QPushButton" name="bt_parentesis2">
          <property name="minimumSize">
           <size>
-           <width>1</width>
-           <height>1</height>
+           <width>0</width>
+           <height>0</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>1</width>
-           <height>1</height>
+           <width>0</width>
+           <height>0</height>
           </size>
          </property>
          <property name="styleSheet">
@@ -679,7 +727,7 @@ background-color:rgb(139, 175, 191);
         <number>0</number>
        </property>
        <item>
-        <widget class="QPushButton" name="bt_parentesis">
+        <widget class="QPushButton" name="bt_parentesis_completo">
          <property name="minimumSize">
           <size>
            <width>78</width>
@@ -709,9 +757,6 @@ QPushButton:hover {
            <width>48</width>
            <height>48</height>
           </size>
-         </property>
-         <property name="shortcut">
-          <string>(</string>
          </property>
         </widget>
        </item>
@@ -871,7 +916,7 @@ QPushButton:hover {
         <number>0</number>
        </property>
        <item>
-        <widget class="QPushButton" name="bt_llaves">
+        <widget class="QPushButton" name="bt_llaves_completo">
          <property name="minimumSize">
           <size>
            <width>78</width>
@@ -901,9 +946,6 @@ QPushButton:hover {
            <width>48</width>
            <height>48</height>
           </size>
-         </property>
-         <property name="shortcut">
-          <string>{</string>
          </property>
         </widget>
        </item>
@@ -1063,7 +1105,7 @@ QPushButton:hover {
         <number>0</number>
        </property>
        <item>
-        <widget class="QPushButton" name="bt_corchetes">
+        <widget class="QPushButton" name="bt_corchetes_completo">
          <property name="minimumSize">
           <size>
            <width>78</width>
@@ -1093,9 +1135,6 @@ QPushButton:hover {
            <width>48</width>
            <height>48</height>
           </size>
-         </property>
-         <property name="shortcut">
-          <string>[</string>
          </property>
         </widget>
        </item>
@@ -1294,7 +1333,7 @@ QPushButton:hover {
           </size>
          </property>
          <property name="shortcut">
-          <string>Alt+9, Alt+4</string>
+          <string>Ctrl+P</string>
          </property>
         </widget>
        </item>

@@ -1,5 +1,8 @@
 
-from modelo.undo_redo import UndoRedo
+# from modelo.undo_redo import UndoRedo
+# from modelo.procesamiento_cadenas import *
+
+from modelo.undo_redo import *
 from modelo.procesamiento_cadenas import *
 
 class Model:
@@ -8,6 +11,7 @@ class Model:
         self.input = ""
         # inicializar las pilas undo y redo
         self.undo_redo = UndoRedo()
+        self.ultima_accion = ""
 
     # gestionar el ingreso de un caracter
     def ingresar_char(self, char):
@@ -15,8 +19,9 @@ class Model:
         self.input += char
         # añadir char a undo_redo
         self.undo_redo.ingresar_char(char)
+        self.ultima_accion = "añadir"
 
-    # 
+    # recuperar la expresion | cadena -> input
     def recuperar_input(self):
         # concatenar cadena interna caracteres 
         return self.input
@@ -24,7 +29,7 @@ class Model:
     # 
     def calcular_resultado(self):
         # caso este vacio la cadena interna
-        if not self.input:
+        if self.expresion_principal_esta_vacia():
             return "0.0"
         
         # transformar la lista en una cadena
@@ -35,11 +40,12 @@ class Model:
         if not verificar_parentesis(cadena):
             return "SYNTAX E."
 
-        infijo = self.input
+        infijo = self.recuperar_input()
         postfijo = infijoPostfija(infijo)
         
         # Caso la expresion en postfijo retorne False -> o sea este mal
         if not postfijo and self.input:
+            print(self.input)
             return "SYNTAX E."
 
         # tratar de evaluar la evaluacion_postfija
@@ -57,15 +63,24 @@ class Model:
 
     ''' RESOLVER '''
     def deshacer(self):
-        # caso no haya nada en la pila undo
-        if not self.undo_redo.undo():
+
+        if self.ultima_accion == "borrar":
+            self.input += self.undo_redo.redo()
+            return 
+
+        if self.ultima_accion == "limpiar":
+            
+            return
+        
+        # caso no haya nada en la pila undo o no haya cadena ingresada
+        if self.expresion_principal_esta_vacia():
             # no hacer nada -> ignorar peticion
             return
 
-        # caso si haya un elem en la pila
-        if self.input != "":
-            # quitar  el ultimo elemento de la cadena interna
-            self.input = self.input[:-1]
+        # caso base
+        self.undo_redo.undo2()
+        self.input = self.input[:-1]
+        self.ultima_accion = "deshacer"
     
     ''' RESOLVER '''
     def rehacer(self):
@@ -74,20 +89,25 @@ class Model:
         # caso no haya algun elemento que se pueda "rehacer"
         if not redo:
             # no hacer nada -> ignorar peticion
-            return
+            return 
+
+        if self.ultima_accion == "limpiar":
+            # self.undo_redo.
+            pass
 
         # caso contrario quitar la lista de redo
-        self.input.append(redo)
+        self.input += redo
 
     def borrar(self):
         # verificar que haya algo que borrar
-        if self.input == "":
+        if self.expresion_principal_esta_vacia():
             # no hacer nada -> ignorar peticion
             return
 
         # caso haya algo
-        self.input = self.input[:-1] # quitar ultimo elem cadena interna
-        self.undo_redo.undo2() # llamar a undo
+        self.input = self.input[:-1] 
+        self.undo_redo.undo2() 
+        self.ultima_accion = "borrar"
 
     ''' RESOLVER '''
     def limpiar(self):
@@ -95,3 +115,6 @@ class Model:
         self.input = ""
         self.undo_redo.Undo = []
         self.undo_redo.Redo = []
+
+    def expresion_principal_esta_vacia(self):
+        return self.input == ""
