@@ -113,13 +113,19 @@ class Controller:
         self.view.ui.bt_dif.clicked.connect(lambda:self.ingresar_char("-"))
         self.view.ui.bt_mul.clicked.connect(lambda:self.ingresar_char("*"))
         self.view.ui.bt_div.clicked.connect(lambda:self.ingresar_char("/"))
-        self.view.ui.bt_pow.clicked.connect(lambda:self.ingresar_char("^"))
+        self.view.ui.bt_pow.clicked.connect(lambda:self.ingresar_char("^")) # <------
 
-        self.view.ui.bt_parentesis.clicked.connect(self.ingresar_parentesis)
+        self.view.ui.bt_parentesis.clicked.connect(lambda:self.ingresar_char("(")) # <------
         self.view.ui.bt_parentesis2.clicked.connect(lambda:self.ingresar_char(")"))
-        self.view.ui.bt_llaves.clicked.connect(self.ingresar_llaves)
+        self.view.ui.bt_parentesis_completo.clicked.connect(self.ingresar_parentesis)
+        
+        self.view.ui.bt_llaves.clicked.connect(lambda:self.ingresar_char("{")) # <------
         self.view.ui.bt_llaves2.clicked.connect(lambda:self.ingresar_char("}"))
-        self.view.ui.bt_corchetes.clicked.connect(self.ingresar_corchetes)
+        self.view.ui.bt_llaves_completo.clicked.connect(self.ingresar_llaves)
+        
+        self.view.ui.bt_corchetes.clicked.connect(lambda:self.ingresar_char("[")) # <------
+        self.view.ui.bt_corchetes2.clicked.connect(lambda:self.ingresar_char("]"))
+        self.view.ui.bt_corchetes_completo.clicked.connect(self.ingresar_corchetes)
 
         self.view.ui.bt_borrar.clicked.connect(self.borrar)
         self.view.ui.bt_limpiar.clicked.connect(self.limpiar)
@@ -127,7 +133,6 @@ class Controller:
         self.view.ui.bt_rehacer.clicked.connect(self.redo)
 
         self.view.ui.bt_resul.clicked.connect(self.mostrar_resultado)
-
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
