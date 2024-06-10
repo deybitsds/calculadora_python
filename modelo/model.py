@@ -73,6 +73,12 @@ class Model:
 
             self.input += self.undo_redo.pila_undo[i*2+1]
     
+        elif x == "limpiar":
+
+            cadena = self.undo_redo.pila_undo.pop()
+            self.undo_redo.pila_redo.insert(-1, cadena)
+            self.input = cadena
+
         else:
             self.input = self.input[:-1]
         
@@ -89,6 +95,14 @@ class Model:
         if x == "borrar":
 
             self.input = self.input[:-1]
+
+        elif x == "limpiar":
+
+            self.input = ""
+
+            cadena = self.undo_redo.pila_redo.pop()
+
+            self.undo_redo.pila_undo.insert(-1, cadena)
 
         else:
 
@@ -115,12 +129,16 @@ class Model:
         print()
 
 
-    ''' RESOLVER '''
     def limpiar(self):
-        # limpiar todo
-        self.input = ""
-        self.undo_redo.Undo = []
-        self.undo_redo.Redo = []
 
+        if self.expresion_principal_esta_vacia():
+            return
+
+        cadena_antigua = self.input
+        self.undo_redo.pila_undo.append(cadena_antigua)
+        self.undo_redo.pila_undo.append("limpiar")
+
+        self.input = ""
+        
     def expresion_principal_esta_vacia(self):
         return self.input == ""
