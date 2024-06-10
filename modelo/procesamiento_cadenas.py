@@ -17,41 +17,18 @@ def verificar_parentesis(cadena):
     return not pila  # Verifica si la pila está vacía al final
 
 # funcion para recuperar el caracter parentesis correspondiente
-def recuperar_parentesis_correspondientes(cadena):
+def determinar_siguiente_caracter(cadena, caracter_apertura, caracter_cierre):
     balance = 0
     for char in cadena:
-        if char == '(':
+        if char == caracter_apertura:
             balance += 1
-        elif char == ')':
+        elif char == caracter_cierre:
             balance -= 1
         if balance < 0:
-            return ")"
-    return "(" if balance == 0 else ")"
+            return caracter_cierre
+        
+    return caracter_apertura if balance == 0 else caracter_cierre
 
-# funcion para recuperar el caracter llave correspondiente
-def recuperar_llaves_correspondientes(cadena):
-    balance = 0
-    for char in cadena:
-        if char == '{':
-            balance += 1
-        elif char == '}':
-            balance -= 1
-        if balance < 0:
-            return "}"
-    return "{" if balance == 0 else "}"
-
-# funcion para recuperar el caracter corchete correspondiente
-def recuperar_corchetes_correspondientes(cadena):
-    balance = 0
-    for char in cadena:
-        if char == '[':
-            balance += 1
-        elif char == ']':
-            balance -= 1
-        if balance < 0:
-            return "]"
-    return "[" if balance == 0 else "]"
-    
 def valPreced(s):
     if s == "^":
         return 4
@@ -116,7 +93,7 @@ def infijoPostfija(expresion):
             # Desapilamos el paréntesis abierto correspondiente
             pila.pop()
         else:
-            return False
+            return "MATH ERROR"
 
     # Desapilamos cualquier operador restante en la pila
     while pila:
@@ -148,7 +125,7 @@ def eval_postfija(expresion):
         elif s == "/":
             opnd2 = pila.pop()
             if opnd2 == 0:
-                return False
+                return "MATH ERROR"
             opnd1 = pila.pop()
             pila.append(opnd1 / opnd2)
         elif s == "^":

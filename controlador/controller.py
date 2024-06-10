@@ -23,33 +23,18 @@ class Controller:
         # actualizar la caja de texto input
         self.view.actualizar_input()
  
-    def ingresar_parentesis(self):
+    def ingresar_siguiente_caracter(self, caracter_apertura, caracter_cierre):
         #
         input_actual = self.model.recuperar_input()
         # recuperar caracter correspondiente
-        caracter = recuperar_parentesis_correspondientes(input_actual)
+        caracter = determinar_siguiente_caracter(input_actual, caracter_apertura, caracter_cierre)
         #
         self.ingresar_char(caracter)
-
-    def ingresar_llaves(self):
-        #
-        input_actual = self.model.recuperar_input()
-        # recuperar caracter correspondiente
-        caracter = recuperar_llaves_correspondientes(input_actual)
-        #
-        self.ingresar_char(caracter)     
-
-    def ingresar_corchetes(self):
-        #
-        input_actual = self.model.recuperar_input()
-        # recuperar caracter correspondiente
-        caracter = recuperar_corchetes_correspondientes(input_actual)
-        #
-        self.ingresar_char(caracter)     
 
     def mostrar_resultado(self):
         # calcular resultado 
         resultado_original = self.model.calcular_resultado()
+        print(resultado_original)
         
         # gestionar los errores
         if not contiene_numeros(str(resultado_original)):
@@ -59,6 +44,7 @@ class Controller:
         # comprobar que el numero sea entero
         resultado_original = float(resultado_original)
         resultado_entero = int(resultado_original)
+
 
         # caso sea convertible a entero
         if resultado_original == resultado_entero:
@@ -117,15 +103,15 @@ class Controller:
 
         self.view.ui.bt_parentesis.clicked.connect(lambda:self.ingresar_char("(")) # <------
         self.view.ui.bt_parentesis2.clicked.connect(lambda:self.ingresar_char(")"))
-        self.view.ui.bt_parentesis_completo.clicked.connect(self.ingresar_parentesis)
+        self.view.ui.bt_parentesis_completo.clicked.connect(lambda:self.ingresar_siguiente_caracter("(", ")"))
         
         self.view.ui.bt_llaves.clicked.connect(lambda:self.ingresar_char("{")) # <------
         self.view.ui.bt_llaves2.clicked.connect(lambda:self.ingresar_char("}"))
-        self.view.ui.bt_llaves_completo.clicked.connect(self.ingresar_llaves)
+        self.view.ui.bt_llaves_completo.clicked.connect(lambda:self.ingresar_siguiente_caracter("{", "}"))
         
         self.view.ui.bt_corchetes.clicked.connect(lambda:self.ingresar_char("[")) # <------
         self.view.ui.bt_corchetes2.clicked.connect(lambda:self.ingresar_char("]"))
-        self.view.ui.bt_corchetes_completo.clicked.connect(self.ingresar_corchetes)
+        self.view.ui.bt_corchetes_completo.clicked.connect(lambda:self.ingresar_siguiente_caracter("[", "]"))
 
         self.view.ui.bt_borrar.clicked.connect(self.borrar)
         self.view.ui.bt_limpiar.clicked.connect(self.limpiar)

@@ -50,16 +50,12 @@ class Model:
 
         # tratar de evaluar la evaluacion_postfija
         try:
-            # caso ocurra un error matematico 
-            if eval_postfija(postfijo) != 0 and not eval_postfija(postfijo):
-                return "MATH ERROR"
+            # caso ocurra un error matematico
+            return eval_postfija(postfijo)
 
         except IndexError: 
             # caso ocurra un error de sintaxis
             return "SYNTAX E."
-
-        # caso pase todas las "pruebas", devolver el numero
-        return eval_postfija(postfijo)
 
     ''' RESOLVER '''
     def deshacer(self):
