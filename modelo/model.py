@@ -66,9 +66,12 @@ class Model:
 
         if x == "borrar":
 
-            x = self.undo_redo.pila_undo[-1]
+            i = -1
 
-            self.input += x
+            while self.undo_redo.pila_undo[i] == "borrar":
+                i -= 1
+
+            self.input += self.undo_redo.pila_undo[i*2+1]
     
         else:
             self.input = self.input[:-1]
