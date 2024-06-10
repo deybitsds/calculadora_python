@@ -132,6 +132,28 @@ color: rgb(255, 255, 255);</string>
         </spacer>
        </item>
        <item>
+        <widget class="QPushButton" name="bt_espacio">
+         <property name="maximumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>11</width>
+           <height>16</height>
+          </size>
+         </property>
+         <property name="shortcut">
+          <string>Space</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QPushButton" name="bt_parentesis">
          <property name="maximumSize">
           <size>

@@ -45,7 +45,6 @@ class Model:
         
         # Caso la expresion en postfijo retorne False -> o sea este mal
         if not postfijo and self.input:
-            print(self.input)
             return "SYNTAX E."
 
         # tratar de evaluar la evaluacion_postfija
@@ -53,7 +52,7 @@ class Model:
             # caso ocurra un error matematico
             return eval_postfija(postfijo)
 
-        except IndexError: 
+        except: 
             # caso ocurra un error de sintaxis
             return "SYNTAX E."
 

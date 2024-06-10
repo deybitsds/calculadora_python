@@ -34,7 +34,6 @@ class Controller:
     def mostrar_resultado(self):
         # calcular resultado 
         resultado_original = self.model.calcular_resultado()
-        print(resultado_original)
         
         # gestionar los errores
         if not contiene_numeros(str(resultado_original)):

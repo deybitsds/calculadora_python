@@ -1,3 +1,4 @@
+
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
@@ -41,6 +42,12 @@ class Ui_MainWindow(object):
         self.horizontalLayout.addWidget(self.titulo)
         spacerItem = QtWidgets.QSpacerItem(295, 17, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
+        self.bt_espacio = QtWidgets.QPushButton(self.fr_cerrar)
+        self.bt_espacio.setMaximumSize(QtCore.QSize(0, 0))
+        self.bt_espacio.setText("")
+        self.bt_espacio.setIconSize(QtCore.QSize(11, 16))
+        self.bt_espacio.setObjectName("bt_espacio")
+        self.horizontalLayout.addWidget(self.bt_espacio)
         self.bt_parentesis = QtWidgets.QPushButton(self.fr_cerrar)
         self.bt_parentesis.setMaximumSize(QtCore.QSize(0, 0))
         self.bt_parentesis.setText("")
@@ -171,12 +178,10 @@ class Ui_MainWindow(object):
         self.txt_input.setText("")
         self.txt_input.setObjectName("txt_input")
 
+
         ''' ALINEADO A LA DERECHA DEL TEXTO INPUT '''
         # Configurar alineación del texto a la derecha
         self.txt_input.setAlignment(QtCore.Qt.AlignRight)
-
-        # Opcional: también puedes configurar la dirección del texto
-        self.txt_input.setLayoutDirection(QtCore.Qt.RightToLeft)
 
         self.horizontalLayout_7.addWidget(self.txt_input)
         self.verticalLayout.addWidget(self.fr_input)
@@ -201,6 +206,7 @@ class Ui_MainWindow(object):
 
         # Opcional: también puedes configurar la dirección del texto
         self.txt_output.setLayoutDirection(QtCore.Qt.RightToLeft)
+
 
         self.horizontalLayout_8.addWidget(self.txt_output, 0, QtCore.Qt.AlignVCenter)
         self.verticalLayout.addWidget(self.fr_output)
@@ -652,6 +658,7 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.titulo.setText(_translate("MainWindow", " Calculadora"))
+        self.bt_espacio.setShortcut(_translate("MainWindow", "Space"))
         self.bt_parentesis.setShortcut(_translate("MainWindow", "("))
         self.bt_llaves.setShortcut(_translate("MainWindow", "{"))
         self.bt_corchetes.setShortcut(_translate("MainWindow", "["))
