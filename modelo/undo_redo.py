@@ -35,12 +35,22 @@ class UndoRedo:
     def undo2(self):
 
         if self.pila_undo_esta_vacia():
-            return False
+            return ""
 
         x = self.pila_undo.pop()
         self.pila_redo.append(x)
-        return True
 
+        return x
+
+    def redo2(self):
+
+        if self.pila_redo_esta_vacia():
+            return ""
+
+        x = self.pila_redo.pop()
+        self.pila_undo.append(x)
+
+        return x
     
     def redo(self):
 

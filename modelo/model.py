@@ -17,9 +17,11 @@ class Model:
     def ingresar_char(self, char):
         # 
         self.input += char
-        # añadir char a undo_redo
         self.undo_redo.ingresar_char(char)
-        self.ultima_accion = "añadir"
+
+        print(self.undo_redo.pila_undo)
+        print(self.undo_redo.pila_redo)
+
 
     # recuperar la expresion | cadena -> input
     def recuperar_input(self):
@@ -60,39 +62,39 @@ class Model:
     ''' RESOLVER '''
     def deshacer(self):
 
-        if self.ultima_accion == "borrar":
-            self.input += self.undo_redo.redo()
-            return 
+        x = self.undo_redo.undo2()
 
-        if self.ultima_accion == "limpiar":
-            
-            return
-        
-        # caso no haya nada en la pila undo o no haya cadena ingresada
-        if self.expresion_principal_esta_vacia():
-            # no hacer nada -> ignorar peticion
-            return
+        if x == "borrar":
 
-        # caso base
-        self.undo_redo.undo2()
-        self.input = self.input[:-1]
-        self.ultima_accion = "deshacer"
+            x = self.undo_redo.pila_undo[-1]
+
+            self.input += x
     
+        else:
+            self.input = self.input[:-1]
+        
+        print()
+        print(self.undo_redo.pila_undo)
+        print(self.undo_redo.pila_redo)
+        print()
+
     ''' RESOLVER '''
     def rehacer(self):
-        # recuperar la listra de redos
-        redo = self.undo_redo.redo()
-        # caso no haya algun elemento que se pueda "rehacer"
-        if not redo:
-            # no hacer nada -> ignorar peticion
-            return 
 
-        if self.ultima_accion == "limpiar":
-            # self.undo_redo.
-            pass
+        x = self.undo_redo.redo2()
 
-        # caso contrario quitar la lista de redo
-        self.input += redo
+        if x == "borrar":
+
+            self.input = self.input[:-1]
+
+        else:
+
+            self.input += x     
+
+        print()
+        print(self.undo_redo.pila_undo)
+        print(self.undo_redo.pila_redo)
+        print()
 
     def borrar(self):
         # verificar que haya algo que borrar
@@ -102,8 +104,13 @@ class Model:
 
         # caso haya algo
         self.input = self.input[:-1] 
-        self.undo_redo.undo2() 
-        self.ultima_accion = "borrar"
+        self.undo_redo.pila_undo.append("borrar")
+
+        print()
+        print(self.undo_redo.pila_undo)
+        print(self.undo_redo.pila_redo)
+        print()
+
 
     ''' RESOLVER '''
     def limpiar(self):
