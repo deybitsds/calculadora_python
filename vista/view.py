@@ -56,7 +56,7 @@ class View(QtWidgets.QMainWindow):
 
     def limpiar(self):
         # establecemos el label txt_output
-        self.ui.txt_output.setText("0.0")
+        self.ui.txt_output.setText("0")
 
     def control_bt_minimizar(self):
         # minimizar ventana principal

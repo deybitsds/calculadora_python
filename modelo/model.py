@@ -30,7 +30,7 @@ class Model:
     def calcular_resultado(self):
         # caso este vacio la cadena interna
         if self.expresion_principal_esta_vacia():
-            return "0.0"
+            return "0"
         
         # transformar la lista en una cadena
         cadena = self.recuperar_input()
@@ -45,6 +45,7 @@ class Model:
         
         # Caso la expresion en postfijo retorne False -> o sea este mal
         if not postfijo and self.input:
+            print(self.input)
             return "SYNTAX E."
 
         # tratar de evaluar la evaluacion_postfija
