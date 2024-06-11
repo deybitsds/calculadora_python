@@ -83,7 +83,8 @@ class Model:
                 i -= 1
 
             # ese numero se recupera y se añade a la cadena principal
-            self.input += self.undo_redo.pila_undo[i * 2 + 1]
+            if len(self.undo_redo.pila_undo[i * 2 + 1]) == 1:
+                self.input += self.undo_redo.pila_undo[i * 2 + 1]
     
         # si la accion fue limpiar
         elif x == "limpiar":
@@ -128,7 +129,8 @@ class Model:
         # caso contrario -> fue un numero y simplemente se agrega el caracter de la pila en la cadena principal
         else:
 
-            self.input += x     
+            if len(x) == 1:
+                self.input += x     
 
 
     # gestor de la opcion de deshacer
