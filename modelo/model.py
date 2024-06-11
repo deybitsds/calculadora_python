@@ -1,144 +1,171 @@
 
-# from modelo.undo_redo import UndoRedo
-# from modelo.procesamiento_cadenas import *
-
 from modelo.undo_redo import *
 from modelo.procesamiento_cadenas import *
 
 class Model:
     def __init__(self):
+
         # inicializar la lista de caracteres interna
         self.input = ""
+        
         # inicializar las pilas undo y redo
         self.undo_redo = UndoRedo()
-        self.ultima_accion = ""
+
 
     # gestionar el ingreso de un caracter
     def ingresar_char(self, char):
-        # 
+
+        # ingresar caracter a la cadena principal
         self.input += char
+
+        # llama a la funcion de undo_redo
         self.undo_redo.ingresar_char(char)
 
-        print(self.undo_redo.pila_undo)
-        print(self.undo_redo.pila_redo)
 
-
-    # recuperar la expresion | cadena -> input
+    # recuperar la cadena interna principal
     def recuperar_input(self):
-        # concatenar cadena interna caracteres 
+
+        # devolver la cadena principal
         return self.input
         
-    # 
+
+    # gestor del calculo del resultado
     def calcular_resultado(self):
-        # caso este vacio la cadena interna
+
+        # caso esté vacia la cadena interna
         if self.expresion_principal_esta_vacia():
+            
             return "0"
         
-        # transformar la lista en una cadena
+        # recuperar la cadena interna
         cadena = self.recuperar_input()
         
         ''' GESTION DE ERRORES '''
         # Caso los parentesis retorne False -> o sea esten mal
         if not verificar_parentesis(cadena):
+
+            # devolver error
             return "SYNTAX E."
 
-        infijo = self.recuperar_input()
-        postfijo = infijoPostfija(infijo)
+        # convertir la cadena de not. infija a not. postfija 
+        postfijo = infijoPostfija(cadena)
         
-        # Caso la expresion en postfijo retorne False -> o sea este mal
+        # Caso la expresion en postfijo retorne False y la cadena no sea vacia
         if not postfijo and self.input:
-            print(self.input)
+
+            # devolver error
             return "SYNTAX E."
 
         # tratar de evaluar la evaluacion_postfija
         try:
-            # caso ocurra un error matematico
+            # devolver el resultado de la evaluación
             return eval_postfija(postfijo)
 
+        # si ocurre algun error
         except: 
-            # caso ocurra un error de sintaxis
+
+            # devolver error
             return "SYNTAX E."
 
-    ''' RESOLVER '''
+
+    # gestor de la opcion de deshacer
     def deshacer(self):
 
-        x = self.undo_redo.undo2()
+        # sacar el tope de la pila undo
+        x = self.undo_redo.undo()
 
+        # si la accion fue de borrar
         if x == "borrar":
 
+            # se busca el numero mas cercano en la pila
             i = -1
-
             while self.undo_redo.pila_undo[i] == "borrar":
                 i -= 1
 
-            self.input += self.undo_redo.pila_undo[i*2+1]
+            # ese numero se recupera y se añade a la cadena principal
+            if len(self.undo_redo.pila_undo[i * 2 + 1]) == 1:
+                self.input += self.undo_redo.pila_undo[i * 2 + 1]
     
+        # si la accion fue limpiar
         elif x == "limpiar":
 
+            # se recupera toda la cadena
             cadena = self.undo_redo.pila_undo.pop()
+
+            # se inserta en la penultima posicion de la pila_redo
             self.undo_redo.pila_redo.insert(-1, cadena)
+            
+            # se reestablece la cadena
             self.input = cadena
 
+        # caso contrario -> fue un numero y simplemente se elimina el ultimo caracter de la cadena principal
         else:
             self.input = self.input[:-1]
         
-        print()
-        print(self.undo_redo.pila_undo)
-        print(self.undo_redo.pila_redo)
-        print()
 
-    ''' RESOLVER '''
+    # gestor de la opcion de deshacer
     def rehacer(self):
 
-        x = self.undo_redo.redo2()
+        # sacar el tope de la pila redo
+        x = self.undo_redo.redo()
 
+        # si la accion fue borrar
         if x == "borrar":
 
+            # se debe rehacer la accion -> realizarla denuevo
             self.input = self.input[:-1]
 
+        # si la accion fue limpiar
         elif x == "limpiar":
 
+            # se debe rehacer la accion -> realizarla denuevo
             self.input = ""
-
+            
+            # se debe recuperar toda la cadena
             cadena = self.undo_redo.pila_redo.pop()
-
+            # guardarla en la pila undo
             self.undo_redo.pila_undo.insert(-1, cadena)
 
+        # caso contrario -> fue un numero y simplemente se agrega el caracter de la pila en la cadena principal
         else:
 
-            self.input += x     
+            if len(x) == 1:
+                self.input += x     
 
-        print()
-        print(self.undo_redo.pila_undo)
-        print(self.undo_redo.pila_redo)
-        print()
 
+    # gestor de la opcion de deshacer
     def borrar(self):
-        # verificar que haya algo que borrar
+        
+        # si la cadena principal esta vacia no realizar nada
         if self.expresion_principal_esta_vacia():
-            # no hacer nada -> ignorar peticion
             return
 
-        # caso haya algo
-        self.input = self.input[:-1] 
+        # borrar el ultimo elemento en la cadena principal
+        self.input = self.input[:-1]
+        # indicar a la pila_undo que se realizo una accion borrar 
         self.undo_redo.pila_undo.append("borrar")
 
-        print()
-        print(self.undo_redo.pila_undo)
-        print(self.undo_redo.pila_redo)
-        print()
 
-
+    # gestor de la opcion de deshacer
     def limpiar(self):
 
+        # si la cadena principal esta vacia no realizar nada
         if self.expresion_principal_esta_vacia():
             return
 
+
+        # recuperar la cadena principal
         cadena_antigua = self.input
+
+        # guardar el estado del programa en pila_undo
         self.undo_redo.pila_undo.append(cadena_antigua)
         self.undo_redo.pila_undo.append("limpiar")
 
+        # limpiar la cadena principal
         self.input = ""
         
+   
+    # gestor de la opcion de deshacer
     def expresion_principal_esta_vacia(self):
+
         return self.input == ""

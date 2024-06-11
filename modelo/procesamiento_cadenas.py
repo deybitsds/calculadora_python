@@ -1,6 +1,8 @@
+
 # modulo para verificar si los parentesis estan correctos en cadena
 def verificar_parentesis(cadena):
     # Diccionario de pares de paréntesis
+
     pares = {')': '(', ']': '[', '}': '{'}
     # Pila para almacenar los paréntesis abiertos
     pila = []
@@ -16,20 +18,31 @@ def verificar_parentesis(cadena):
 
     return not pila  # Verifica si la pila está vacía al final
 
-# funcion para recuperar el caracter parentesis correspondiente
+
+# funcion para predecir el siguiente caracter
 def determinar_siguiente_caracter(cadena, caracter_apertura, caracter_cierre):
+
+    # inicializar el balance en 0
     balance = 0
+
+    # recorrer toda la cadena anterior
     for char in cadena:
+        
+        # caso se lea un caracter_apertura sumar al balance 1
         if char == caracter_apertura:
             balance += 1
+        
+        # caso se lea un caracter_cierre restar al balance 1
         elif char == caracter_cierre:
             balance -= 1
-        if balance < 0:
-            return caracter_cierre
         
+    # si el balance es 0 se abre un nuevo bloque 
     return caracter_apertura if balance == 0 else caracter_cierre
 
+
+# funcion para determinar la prioridad o nivel de una operacion
 def valPreced(s):
+
     if s == "^":
         return 4
     elif s == "*" or s == "/":
@@ -39,7 +52,10 @@ def valPreced(s):
     else:
         return 1
 
+
+# funcion para ver si un parentesis esta abierto o no
 def parentesisAbierto(s):
+
     if s == ")":
         return "("
     elif s == "]":
@@ -47,9 +63,9 @@ def parentesisAbierto(s):
     else:
         return "{"
 
+
+# modulo para convertir una expresion de infija a postfija
 def infijoPostfija(expresion):
-    # Quitar espacios de la expresión
-    # expresion = expresion.replace(" ", "")
 
     # Convertir la expresión en una lista de tokens
     infijo = []
@@ -101,11 +117,11 @@ def infijoPostfija(expresion):
 
     return salida
 
-def eval_postfija(expresion):
-    pila = []
 
-    # expresion = expresion.strip()
-    # postfijo = expresion.split(" ")
+# modulo para calcular el resultado de una expresion postfija
+def eval_postfija(expresion):
+
+    pila = []
 
     postfijo = expresion
 
@@ -137,15 +153,15 @@ def eval_postfija(expresion):
 
     return pila[-1]
 
+
+# funcion que devuelve si una cadena posee numeros o no
 def contiene_numeros(cadena):
+
     for caracter in cadena:
         if caracter.isdigit():
             return True
     return False
 
-def probar_modulo(modulo):
-    while 1:
-        print(modulo(input("cadena: ")))
 
 if __name__ == "__main__":
 
